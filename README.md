@@ -30,7 +30,7 @@ litClient.receive ( records, MAX_CHANNEL_COUNT );
 
 ##Error Codes
 
-* `ERROR_OVERFLOW = -101`, the supplied ` LithouseRecord` does not contain enough space for incoming records. Or, the channel name or data buffer is longer than 10 characters.    
+* `ERROR_OVERFLOW = -101`, the supplied ` LithouseRecord` array does not contain enough space for incoming records. Or, the channel name or data buffer is longer than 10 characters.    
 * `ERROR_NETWORK_FAILURE = -102`, the client is unable to connect to api.lithouse.co.
 
 The library will also print out debugging information on the serial monitor in case of an error.

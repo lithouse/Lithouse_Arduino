@@ -77,7 +77,7 @@ void uploadFSRState ( ) {
   Serial.println ( fsrReading );
   
   //Normalizing FSR reading 
-  int currentPressure = (fsrReading > 800) ? 80 : 0;
+  int currentPressure = (fsrReading > 700) ? 70 : 0;
   
   //Only upload reading if there was a change  
   if ( currentPressure != fsrPressure ) {

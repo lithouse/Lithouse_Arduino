@@ -3,12 +3,12 @@
 
 #include <LithouseConstant.h>
 #include <LithouseRecord.h>
-#include <Client.h>
+#include <WiFly.h>
 
 class LithouseClient
 {
 public:
-	LithouseClient ( Client& client, const char* deviceKey );
+	LithouseClient(WiFlyClient& client, const char* deviceKey);
 	
 	int receive(LithouseRecord records[], int MAX_RECORD_COUNT);
 	int send ( LithouseRecord records [], int recordCount );
@@ -19,7 +19,7 @@ private:
 	int parseResponseBody(LithouseRecord records[], int MAX_RECORD_COUNT);
 	char* extractNextJSONValue ( const char* jsonString, char* value );
 
-	Client& _client;
+	WiFlyClient& _client;
 
 	static const int MAX_DEVICE_KEY_LENGTH = 40;
 	//Maximum length of a HTTP request line

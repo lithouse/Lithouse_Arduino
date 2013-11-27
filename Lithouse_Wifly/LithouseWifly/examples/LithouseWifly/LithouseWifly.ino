@@ -1,5 +1,5 @@
 /*
- Lithouse WiFi client 
+ Lithouse Wifly client 
  
  This sketch connects to api.lithouse.co through LithouseClient.
  It expects "on" or "off" command on incoming "LED" channel. 
@@ -8,19 +8,22 @@
  Circuit:
  * Described in getting started with Arduino tutorial in lithouse.co.
  
+ Note:
+ Lithouse client library will not compile with the original 
+ SparkFun WiFly_Shield library. Please use the one included with LithouseWifly. 
+ 
  created 11 Nov 2013
  by Shah Hossain
  
  */
 
-#include <SPI.h>
-#include <WiFi.h>
-#include <Lithouse.h>
 
-char ssid[] = "YOUR_SSID";
-char pass[] = "YOUR_NETWORK_PASSWORD";
-WiFiClient client;
-int status = WL_IDLE_STATUS;
+#include <SPI.h>
+#include <WiFly.h>
+#include <Lithouse.h>
+#include "Credentials.h"
+
+WiFlyClient  client;
 
 //Copy deviceKey from Lithouse portal
 char deviceKey [] = "YOUR_DEVICE_KEY";
@@ -44,31 +47,26 @@ const int MAX_LENGTH = 10;
 char dataBuffer [MAX_LENGTH];
 char channelBuffer [MAX_LENGTH];
 
+
 void setup() {
   pinMode(LED_OUT_PIN, OUTPUT);
+  
   Serial.begin ( 9600 );
-  while (!Serial) {
-    ; // wait for serial port to connect. Needed for Leonardo only
-  }
   
-  // check for the presence of the shield:
-  if (WiFi.status() == WL_NO_SHIELD) {
-    Serial.println("WiFi shield not present"); 
-    // don't continue:
-    while(true);
-  } 
+  WiFly.begin ( );
   
-  // attempt to connect to Wifi network:
-  while (status != WL_CONNECTED) { 
-    Serial.print("Attempting to connect to SSID: ");
-    Serial.println(ssid);
-    // Connect to WPA/WPA2 network. Change this line if using open or WEP network:    
-    status = WiFi.begin(ssid, pass);
+  if ( !WiFly.join ( ssid, passphrase ) ) {
+    Serial.println ( "Association failed." );
+    while ( 1 ) {
+      // Hang on failure.
+    }
+  }  
+  Serial.println ( "Connected to wifi" );
   
-    // wait 10 seconds for connection:
-    delay(10000);
-  } 
-  Serial.println("connecting...to lithouse");  
+  delay ( 10000 );
+  
+  Serial.println ( "Connecting to Lithouse" );
+  
 }
 
 void loop() {
@@ -84,7 +82,7 @@ void uploadFSRState ( ) {
   Serial.println ( fsrReading );
   
   //Normalizing FSR reading 
-  int currentPressure = (fsrReading > 800) ? 80 : 0;
+  int currentPressure = (fsrReading > 700) ? 70 : 0;
   
   //Only upload reading if there was a change  
   if ( currentPressure != fsrPressure ) {
@@ -124,5 +122,4 @@ int stricmp(const char *s1, const char *s2)
   } 
   
   return (unsigned char) *s1 < (unsigned char) *s2 ? -1 : 1; 
-} 
-
+}

@@ -6,7 +6,7 @@ const char* LithouseClient::API_URI = "/v1/records HTTP/1.0";
 const char* LithouseClient::USER_AGENT = "User-Agent: Arduino-lib/1.0";
 const char* LithouseClient::CONTENT_TYPE = "Content-Type: application/json";
 
-LithouseClient::LithouseClient(Client& client, const char* deviceKey)
+LithouseClient::LithouseClient(WiFlyClient& client, const char* deviceKey)
 : _client(client)
 {
 	strcpy ( _deviceKey, deviceKey );

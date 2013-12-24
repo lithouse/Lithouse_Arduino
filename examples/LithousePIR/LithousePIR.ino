@@ -5,7 +5,7 @@
  Lithouse cloud is notified, if there is a LOW to HIGH transition on that pin.   
  
  Circuit:
- * Described in http://www.instructables.com/id/E9U6LJIHPDB22CD/
+ * Described in http://www.instructables.com/id/Triggering-IFTTT-from-Arduino-using-Lithouse/
  
  created 11 Nov 2013
  by Shah Hossain

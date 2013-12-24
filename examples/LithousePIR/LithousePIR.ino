@@ -30,7 +30,7 @@ const int MAX_CHANNEL_COUNT = 1;
 LithouseRecord records [MAX_CHANNEL_COUNT]; 
 
 
-int ledPin = 13;                // output pin for the LED
+int ledPin = 7;                // output pin for the LED
 int inputPin = 2;               // input pin for the PIR sensor
 int pirState = LOW;             // we start assuming that no motion is detected
 int pirValue = 0;               // reading of the PIR sensor
